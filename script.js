@@ -76,13 +76,29 @@ const questions = [
     }
 
     function submitQuiz() {
-      // Calculate the score
-      const score = questions.reduce((acc, q, index) => acc + (userAnswers[index] === q.correctAnswer ? 1 : 0), 0);
 
+       
+      // Calculate the score
+      const score = questions.reduce((acc,questions,index) => {
+        // Check if the user answered the question
+
+        
+        if (userAnswers[index] !== null) {
+          // Check if the user's answer is correct
+
+
+     
+          if (userAnswers[index] === questions.answer) {
+            return acc + 1;
+          }
+        }
+        return acc;
+      }, 0);
+    
       // Display the score
       const scoreElement = document.getElementById('score');
       scoreElement.textContent = `Your score is ${score} out of ${questions.length}.`;
-
+    
       // Save the score to local storage
       localStorage.setItem('score', score);
     }
